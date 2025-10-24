@@ -3,8 +3,13 @@
  * Handles API communication and UI updates
  */
 
-// API base URL - update this if your backend is running on a different port
-const API_BASE_URL = 'http://localhost:8000';
+// API base URL - automatically detects dev vs production
+const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8001'  // Development
+    : window.location.origin;   // Production (same origin as frontend)
+
+console.log('API_BASE_URL:', API_BASE_URL);
+console.log('window.location:', window.location);
 
 /**
  * Display an error message to the user
