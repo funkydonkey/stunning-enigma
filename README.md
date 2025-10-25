@@ -20,6 +20,7 @@ Enter any Excel formula and get both beautified and optimized versions with expl
 - **AI**: Anthropic's Claude 3.5 Sonnet
 - **Frontend**: Vanilla HTML/CSS/JavaScript with liquid glass styling
 - **Package Manager**: uv
+Ready for Render deploy [![Render Deployment](https://img.shields.io/badge/Render-Live-blue)](https://your-render-url.onrender.com)
 
 ## Prerequisites
 
