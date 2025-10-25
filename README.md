@@ -52,7 +52,9 @@ ANTHROPIC_API_KEY=your-api-key-here
 
 ## Running the Application
 
-### Start the Backend Server
+The application serves both the frontend and backend from a single FastAPI server, making it deployment-agnostic and easy to share.
+
+### Start the Server
 
 ```bash
 # Activate virtual environment (if not already activated)
@@ -60,33 +62,17 @@ source .venv/bin/activate  # On macOS/Linux
 # or
 .venv\Scripts\activate  # On Windows
 
-# Run the FastAPI server
+# Run the FastAPI server (serves both frontend and API)
 uvicorn app.main:app --reload --port 8000
 ```
 
-The API will be available at `http://localhost:8000`
+### Access the Application
 
-### Access API Documentation
+- **Web Interface**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+- **Alternative API Docs**: http://localhost:8000/redoc
 
-FastAPI provides interactive API documentation:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-### Open the Frontend
-
-You can either:
-
-**Option 1**: Open directly in browser
-```bash
-open frontend/index.html
-```
-
-**Option 2**: Serve with Python's HTTP server
-```bash
-python -m http.server 8080 --directory frontend
-```
-
-Then navigate to `http://localhost:8080`
+That's it! The frontend is automatically served by FastAPI, so you only need one server running.
 
 ## Usage
 
@@ -228,19 +214,28 @@ If you see errors about missing API keys:
 2. Check `ANTHROPIC_API_KEY` is set correctly
 3. Ensure no extra spaces or quotes around the key
 
-### CORS Errors
+### Port Already in Use
 
-If the frontend can't connect to the backend:
-1. Verify backend is running on port 8000
-2. Check `API_BASE_URL` in `frontend/app.js` matches your setup
-3. Ensure CORS middleware is configured in `app/main.py`
+If you see "Address already in use" error:
+```bash
+# Find and kill the process using port 8000
+lsof -i :8000
+kill -9 <PID>
+
+# Or use a different port
+uvicorn app.main:app --reload --port 8001
+```
 
 ### Formula Not Beautifying
 
 If beautification returns the original formula:
 1. Check for balanced parentheses
 2. Verify the formula is valid Excel syntax
-3. Look at browser console for error messages
+3. Look at browser console (F12) for error messages
+
+### Deployment Issues
+
+The app is designed to be deployment-agnostic. It automatically uses `window.location.origin` for the API, so it works on any platform (Render, Heroku, Vercel, etc.) without URL configuration.
 
 ## Development
 

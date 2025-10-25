@@ -6,8 +6,11 @@ Provides endpoints for beautifying and optimizing Excel formulas using AI.
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from typing import Optional
+from pathlib import Path
 
 from app.beautifier import beautify_formula
 from app.ai_agent import optimize_formula
@@ -49,18 +52,15 @@ app.add_middleware(
 )
 
 
+# Mount static files (frontend)
+frontend_path = Path(__file__).parent.parent / "frontend"
+app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
+
+
 @app.get("/")
-async def root():
-    """Root endpoint with API information."""
-    return {
-        "name": "Excel Formula Optimizer API",
-        "version": "0.1.0",
-        "endpoints": {
-            "/format": "POST - Beautify an Excel formula",
-            "/simplify": "POST - Beautify and optimize an Excel formula with AI",
-            "/docs": "GET - API documentation",
-        }
-    }
+async def serve_frontend():
+    """Serve the frontend application."""
+    return FileResponse(str(frontend_path / "index.html"))
 
 
 @app.post("/format", response_model=FormatResponse)

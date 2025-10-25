@@ -68,13 +68,16 @@ This project integrates multiple AI agent frameworks and services:
 
 ### Running the Application
 
-```bash
-# Start the FastAPI backend server
-uvicorn app.main:app --reload --port 8000
+The application uses a single-server architecture where FastAPI serves both the frontend and backend:
 
-# Open frontend/index.html in a browser or serve with:
-python -m http.server 8080 --directory frontend
+```bash
+# Start the server (serves both frontend and API)
+uvicorn app.main:app --reload --port 8000
 ```
+
+Access:
+- Frontend: http://localhost:8000
+- API Docs: http://localhost:8000/docs
 
 ### Running Tests
 
@@ -90,9 +93,12 @@ Once running, FastAPI auto-generates docs at:
 ## Architecture
 
 ### Backend Structure (`app/`)
-- **main.py**: FastAPI application with two main endpoints:
+- **main.py**: FastAPI application serving both frontend and API:
+  - `GET /`: Serves the frontend HTML (index.html)
+  - `GET /static/*`: Serves frontend static files (app.js)
   - `POST /format`: Accepts formula, returns beautified version
   - `POST /simplify`: Accepts formula, returns beautified + optimized versions with explanation
+  - Single-server architecture for deployment simplicity
 - **beautifier.py**: Formula parsing and formatting logic
   - Handles indentation for nested expressions
   - Line breaks for function arguments (IF/AND/OR/LET/IFS, etc.)
@@ -109,7 +115,10 @@ Once running, FastAPI auto-generates docs at:
   - Formula input textarea
   - "Beautify" and "Simplify" buttons
   - Results display with copy functionality
+  - Social media footer links
 - **app.js**: API communication and UI updates
+  - Uses `window.location.origin` for deployment-agnostic API calls
+  - Automatically works in any deployment environment
 
 ### AI Agent Strategy
 Uses **Anthropic's Claude** (via anthropic package) for formula optimization:
@@ -130,3 +139,12 @@ The beautifier supports common Excel functions:
 - AI API failures: Fallback to beautified version only
 - Empty input: Return validation error
 - All errors returned with informative messages to frontend
+- CORS is pre-configured since frontend and backend share the same origin
+
+### Deployment
+The application is deployment-agnostic:
+- Single server serves both frontend and API
+- No hardcoded URLs - uses `window.location.origin`
+- Works on any platform: Render, Heroku, Vercel, Railway, etc.
+- Just set `ANTHROPIC_API_KEY` environment variable and deploy
+- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`

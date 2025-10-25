@@ -25,26 +25,26 @@ Replace `your-api-key-here` with your actual Anthropic API key from https://cons
 
 ## Step 3: Run the Application
 
-**Option A: Use the quick start script**
+The application serves both frontend and backend from a single server:
 
+```bash
+# Activate virtual environment
+source .venv/bin/activate  # macOS/Linux
+# or
+.venv\Scripts\activate  # Windows
+
+# Start the server (serves both frontend and API)
+uvicorn app.main:app --reload --port 8000
+```
+
+Or use the quick start script:
 ```bash
 ./run.sh
 ```
 
-**Option B: Run manually**
-
-```bash
-# Terminal 1: Start backend
-source .venv/bin/activate
-uvicorn app.main:app --reload --port 8000
-
-# Terminal 2: Start frontend
-python3 -m http.server 8080 --directory frontend
-```
-
 ## Step 4: Test It Out
 
-1. Open your browser to `http://localhost:8080`
+1. Open your browser to `http://localhost:8000`
 2. Enter a formula like: `=IF(A1>0,IF(B1<10,"OK","NO"),"FAIL")`
 3. Click "Beautify" to see the formatted version
 4. Click "Simplify with AI" to get an optimized version with explanation
@@ -72,8 +72,9 @@ pytest tests/ -v
 ## Troubleshooting
 
 - **API key error**: Make sure `.env` file exists and contains valid `ANTHROPIC_API_KEY`
-- **Port in use**: Change port numbers in the commands above
+- **Port in use**: Kill the process (`lsof -i :8000` then `kill -9 <PID>`) or use a different port
 - **Dependencies error**: Run `uv sync` again
+- **Frontend not loading**: The frontend is served by FastAPI at the root URL (`/`), API docs are at `/docs`
 
 ## Example Formulas
 

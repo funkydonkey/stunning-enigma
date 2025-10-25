@@ -31,14 +31,13 @@ else
 fi
 
 # Start the backend server
-echo "✓ Starting FastAPI backend on http://localhost:8000"
-echo "✓ API documentation available at http://localhost:8000/docs"
+echo "✓ Starting FastAPI server on http://localhost:8000"
 echo ""
-echo "To access the frontend:"
-echo "  1. Open another terminal"
-echo "  2. Run: python3 -m http.server 8080 --directory frontend"
-echo "  3. Visit: http://localhost:8080"
+echo "Access points:"
+echo "  • Web Interface: http://localhost:8000"
+echo "  • API Documentation: http://localhost:8000/docs"
 echo ""
+echo "The server serves both the frontend and API."
 echo "Press Ctrl+C to stop the server"
 echo ""
 
