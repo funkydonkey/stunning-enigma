@@ -5,12 +5,25 @@ Uses Claude (Anthropic) to suggest optimized and simplified Excel formulas.
 """
 
 import os
+import logging
 from typing import Optional
+from datetime import datetime
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('anthropic_traces.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 
 class FormulaOptimizerAgent:
@@ -47,7 +60,18 @@ class FormulaOptimizerAgent:
                 - comment: Explanation of the optimization
         """
         try:
+            start_time = datetime.now()
             prompt = self._create_optimization_prompt(formula, beautified)
+
+            # Log request details
+            logger.info("="*80)
+            logger.info(f"[TRACE START] optimize_formula")
+            logger.info(f"Model: {self.model}")
+            logger.info(f"Temperature: 0")
+            logger.info(f"Max Tokens: 2000")
+            logger.info(f"Input Formula Length: {len(formula)} chars")
+            logger.info(f"Prompt Preview: {prompt[:200]}...")
+
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=2000,
@@ -60,11 +84,25 @@ class FormulaOptimizerAgent:
                 ]
             )
 
+            # Log response details
+            duration = (datetime.now() - start_time).total_seconds()
+            logger.info(f"[TRACE END] optimize_formula - Duration: {duration:.3f}s")
+            logger.info(f"Response ID: {response.id}")
+            logger.info(f"Model Used: {response.model}")
+            logger.info(f"Stop Reason: {response.stop_reason}")
+            logger.info(f"Input Tokens: {response.usage.input_tokens}")
+            logger.info(f"Output Tokens: {response.usage.output_tokens}")
+            logger.info(f"Total Tokens: {response.usage.input_tokens + response.usage.output_tokens}")
+            logger.info(f"Response Content: {response.content[0].text}")
+            logger.info("="*80)
+
             # Parse the response
             result = self._parse_response(response.content[0].text)
             return result
 
         except Exception as e:
+            # Log errors
+            logger.error(f"[TRACE ERROR] optimize_formula failed: {str(e)}", exc_info=True)
             # If AI fails, return fallback response
             return {
                 "simplified": formula,

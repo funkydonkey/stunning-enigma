@@ -6,7 +6,20 @@ Handles nested functions and complex expressions.
 """
 
 import re
+import logging
 from typing import Optional
+from datetime import datetime
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('anthropic_traces.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 
 class FormulaBeautifier:
@@ -44,6 +57,14 @@ class FormulaBeautifier:
             return formula
 
         try:
+            start_time = datetime.now()
+
+            # Log beautification start
+            logger.info("="*80)
+            logger.info(f"[BEAUTIFIER START]")
+            logger.info(f"Input Formula Length: {len(formula)} chars")
+            logger.info(f"Input Preview: {formula[:100]}{'...' if len(formula) > 100 else ''}")
+
             # Preserve the leading = if present
             has_equals = formula.strip().startswith('=')
             if has_equals:
@@ -56,8 +77,17 @@ class FormulaBeautifier:
             if has_equals:
                 formatted = '=' + formatted
 
+            # Log beautification end
+            duration = (datetime.now() - start_time).total_seconds()
+            logger.info(f"[BEAUTIFIER END] - Duration: {duration:.3f}s")
+            logger.info(f"Output Formula Length: {len(formatted)} chars")
+            logger.info(f"Output Preview: {formatted[:100]}{'...' if len(formatted) > 100 else ''}")
+            logger.info("="*80)
+
             return formatted
-        except Exception:
+        except Exception as e:
+            # Log errors
+            logger.error(f"[BEAUTIFIER ERROR] Beautification failed: {str(e)}", exc_info=True)
             # If beautification fails, return the original formula
             return formula
 
