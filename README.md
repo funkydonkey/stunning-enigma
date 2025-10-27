@@ -11,7 +11,8 @@ An AI-powered web application that beautifies and optimizes Excel formulas using
 - 📋 **Copy to Clipboard**: Easy copying of formatted formulas
 
 ## Screenshots
-<img width="1302" height="700" alt="image" src="https://github.com/user-attachments/assets/e5e3470f-3504-4635-b3b2-13a2c6378d02" />
+<img width="875" height="493" alt="image" src="https://github.com/user-attachments/assets/3ff47471-4e65-4b34-a43c-1694f492204a" />
+
 
 Enter any Excel formula and get both beautified and optimized versions with explanations.
 
