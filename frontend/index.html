@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel Formula Optimizer</title>
+    <title>Pet Projects Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -59,13 +59,13 @@
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1200px;
             position: relative;
             z-index: 1;
         }
 
         /* Enhanced iOS-style liquid glass effect */
-        .glass-card {
+        .glass-header {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -75,93 +75,130 @@
                 0 8px 32px 0 rgba(31, 38, 135, 0.25),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
             padding: 48px;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
+            text-align: center;
         }
 
         h1 {
             color: white;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 700;
             margin-bottom: 12px;
-            text-align: center;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             letter-spacing: -0.5px;
         }
 
         .subtitle {
             color: rgba(255, 255, 255, 0.85);
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 400;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-        }
-
-        textarea, input {
-            width: 100%;
-            padding: 16px 18px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(10px);
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            color: white;
-            font-size: 1rem;
-            font-family: 'SF Mono', 'Courier New', monospace;
-            resize: vertical;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        textarea:focus, input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transform: translateY(-1px);
-        }
-
-        textarea::placeholder, input::placeholder {
-            color: rgba(255, 255, 255, 0.45);
-        }
-
-        .button-group {
-            display: flex;
-            gap: 12px;
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
             margin-bottom: 32px;
         }
 
-        button {
-            flex: 1;
-            padding: 16px 32px;
+        .project-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 24px;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow:
+                0 8px 32px 0 rgba(31, 38, 135, 0.25),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 12px 48px 0 rgba(31, 38, 135, 0.35),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .project-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 8px;
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .project-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px) saturate(180%);
             border: 1.5px solid rgba(255, 255, 255, 0.25);
             border-radius: 14px;
             color: white;
-            font-size: 1rem;
+            text-decoration: none;
+            font-size: 0.95rem;
             font-weight: 600;
-            cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
                 0 2px 8px rgba(0, 0, 0, 0.08),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             letter-spacing: 0.3px;
+            margin-top: 8px;
         }
 
-        button:hover:not(:disabled) {
+        .project-link:hover {
             background: rgba(255, 255, 255, 0.22);
             border-color: rgba(255, 255, 255, 0.35);
             transform: translateY(-2px);
@@ -170,223 +207,52 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
-        button:active:not(:disabled) {
+        .project-link:active {
             transform: translateY(0);
             box-shadow:
                 0 2px 6px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
-        button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .results {
-            display: none;
-        }
-
-        .results.show {
-            display: block;
-        }
-
-        .result-section {
-            margin-bottom: 25px;
-        }
-
-        .result-header {
-            margin-bottom: 10px;
-        }
-
-        .result-title {
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0.3px;
-        }
-
-        .result-content-wrapper {
-            display: flex;
-            gap: 10px;
-            align-items: stretch;
-        }
-
-        .result-content {
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(10px);
-            padding: 18px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.95);
-            font-family: 'SF Mono', 'Courier New', monospace;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 300px;
-            overflow-y: auto;
-            flex: 1;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .copy-btn {
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px) saturate(180%);
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 44px;
-            min-width: 44px;
-            max-width: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 0 0 auto;
-            box-shadow:
-                0 2px 6px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        }
-
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.22);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .copy-btn:active {
-            transform: scale(0.98);
-        }
-
-        .copy-btn.copied {
-            background: rgba(52, 199, 89, 0.3);
-            border-color: rgba(52, 199, 89, 0.4);
-        }
-
-        .comment-section {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(10px);
-            padding: 18px;
-            border-radius: 14px;
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-left: 4px solid rgba(255, 255, 255, 0.5);
-            box-shadow:
-                0 2px 8px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        }
-
-        .comment-title {
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-        }
-
-        .comment-text {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .error {
-            background: rgba(255, 59, 48, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1.5px solid rgba(255, 59, 48, 0.3);
-            color: white;
-            padding: 16px;
-            border-radius: 14px;
-            margin-bottom: 24px;
-            display: none;
-            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.1);
-        }
-
-        .error.show {
-            display: block;
-            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 24px 0;
-        }
-
-        .loading.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top: 3px solid rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            margin: 0 auto 12px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* iOS-style scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.4);
+        .project-link svg {
+            width: 16px;
+            height: 16px;
         }
 
         /* Footer styles */
         .footer {
-            margin-top: 40px;
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 24px;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow:
+                0 8px 32px 0 rgba(31, 38, 135, 0.25),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+            padding: 32px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             gap: 20px;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
         }
 
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(10px);
             border: 1.5px solid rgba(255, 255, 255, 0.2);
@@ -416,74 +282,112 @@
             width: 20px;
             height: 20px;
         }
+
+        /* iOS-style scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .glass-header {
+                padding: 32px 24px;
+            }
+
+            .project-card {
+                padding: 24px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="glass-card">
-            <h1>Excel Formula Optimizer</h1>
-            <p class="subtitle">Beautify and optimize your Excel formulas with AI</p>
+        <!-- Header -->
+        <div class="glass-header">
+            <h1>My Pet Projects</h1>
+            <p class="subtitle">A collection of tools and experiments I've built to explore new technologies</p>
+        </div>
 
-            <div class="error" id="error"></div>
-
-            <div class="form-group">
-                <label for="formula-input">Enter your Excel formula:</label>
-                <textarea
-                    id="formula-input"
-                    rows="4"
-                    placeholder="=IF(AND(A1>0,B1<10),&quot;OK&quot;,&quot;FAIL&quot;)"
-                ></textarea>
-            </div>
-
-            <div class="button-group">
-                <button id="beautify-btn" onclick="beautifyFormula()">Beautify</button>
-                <button id="simplify-btn" onclick="simplifyFormula()">Simplify with AI</button>
-            </div>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Processing your formula...</p>
-            </div>
-
-            <div class="results" id="results">
-                <div class="result-section">
-                    <div class="result-header">
-                        <span class="result-title">Beautified Formula</span>
-                    </div>
-                    <div class="result-content-wrapper">
-                        <div class="result-content" id="pretty-result"></div>
-                        <button class="copy-btn" onclick="copyToClipboard('pretty-result')" title="Copy to clipboard">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                        </button>
-                    </div>
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Excel Formula Optimizer Project -->
+            <div class="project-card">
+                <div class="project-icon">📊</div>
+                <h2 class="project-title">Excel Formula Optimizer</h2>
+                <p class="project-description">
+                    An AI-powered tool that beautifies and optimizes Excel formulas.
+                    Input complex formulas and get back properly formatted, optimized versions
+                    with explanations of improvements using Claude AI.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">FastAPI</span>
+                    <span class="tag">Claude AI</span>
+                    <span class="tag">JavaScript</span>
                 </div>
+                <a href="/excel-optimizer" class="project-link">
+                    View Project
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-                <div class="result-section" id="simplified-section" style="display: none;">
-                    <div class="result-header">
-                        <span class="result-title">Optimized Formula</span>
-                    </div>
-                    <div class="result-content-wrapper">
-                        <div class="result-content" id="simplified-result"></div>
-                        <button class="copy-btn" onclick="copyToClipboard('simplified-result')" title="Copy to clipboard">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="comment-section" id="comment-section" style="display: none;">
-                    <div class="comment-title">Explanation</div>
-                    <div class="comment-text" id="comment-text"></div>
+            <!-- Placeholder for future projects -->
+            <div class="project-card" style="opacity: 0.6;">
+                <div class="project-icon">🚀</div>
+                <h2 class="project-title">Coming Soon</h2>
+                <p class="project-description">
+                    More exciting projects are on the way! Check back soon to see what I've been working on.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">TBD</span>
                 </div>
             </div>
 
-            <!-- Footer with social links -->
-            <div class="footer">
+            <!-- Another placeholder -->
+            <div class="project-card" style="opacity: 0.6;">
+                <div class="project-icon">💡</div>
+                <h2 class="project-title">Your Next Discovery</h2>
+                <p class="project-description">
+                    New projects and experiments will be added here as I continue exploring new technologies and ideas.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">TBD</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-text">Connect with me on social media</p>
+            <div class="social-links">
                 <a href="https://funkydonkey.github.io/" target="_blank" rel="noopener noreferrer" class="social-link" title="Website">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -506,7 +410,5 @@
             </div>
         </div>
     </div>
-
-    <script src="/static/app.js"></script>
 </body>
 </html>
