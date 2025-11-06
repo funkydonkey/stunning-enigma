@@ -58,9 +58,15 @@ app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 
 
 @app.get("/")
-async def serve_frontend():
-    """Serve the frontend application."""
+async def serve_portfolio():
+    """Serve the portfolio homepage."""
     return FileResponse(str(frontend_path / "index.html"))
+
+
+@app.get("/excel-optimizer")
+async def serve_excel_optimizer():
+    """Serve the Excel Formula Optimizer application."""
+    return FileResponse(str(frontend_path / "excel-optimizer.html"))
 
 
 @app.post("/format", response_model=FormatResponse)
