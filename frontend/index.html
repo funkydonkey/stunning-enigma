@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,139 +16,136 @@
         }
 
         body {
-            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            background: #FAF5FF;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: #FFFFFF;
             min-height: 100vh;
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding: 60px 30px;
+            padding: 80px 40px;
             overflow-x: hidden;
+            color: #000;
         }
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
         }
 
-        /* Neo-brutalist header */
+        /* Nothing-style header */
         .glass-header {
-            background: #9333EA;
-            border: 5px solid #000;
-            box-shadow: 12px 12px 0 #000;
-            padding: 80px 60px;
-            margin-bottom: 60px;
+            background: #000;
+            padding: 120px 80px;
+            margin-bottom: 100px;
             text-align: center;
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .glass-header:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 16px 16px 0 #000;
         }
 
         h1 {
             color: #FFF;
-            font-size: 4.5rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
-            line-height: 1;
-            text-transform: uppercase;
+            font-size: 5rem;
+            font-weight: 300;
+            margin-bottom: 32px;
+            letter-spacing: -3px;
+            line-height: 0.9;
         }
 
         .subtitle {
-            color: #FFF;
-            font-size: 1.25rem;
-            font-weight: 500;
-            line-height: 1.6;
-            max-width: 700px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.125rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 600px;
             margin: 0 auto;
+            letter-spacing: -0.2px;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1px;
+            margin-bottom: 100px;
+            background: #000;
+            border: 1px solid #000;
         }
 
         .project-card {
             background: #FFF;
-            border: 5px solid #000;
-            box-shadow: 8px 8px 0 #000;
-            padding: 40px;
-            transition: all 0.3s ease;
+            padding: 60px 48px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
+            position: relative;
         }
 
         .project-card:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0 #000;
+            background: #FF0000;
         }
 
-        .project-card:nth-child(1) {
-            background: #FCE7F3;
+        .project-card:hover .project-title,
+        .project-card:hover .project-description,
+        .project-card:hover .tag {
+            color: #FFF;
         }
 
-        .project-card:nth-child(2) {
-            background: #F3E8FF;
+        .project-card:hover .project-icon {
+            background: #FFF;
+            color: #FF0000;
         }
 
-        .project-card:nth-child(3) {
-            background: #DBEAFE;
+        .project-card:hover .project-link {
+            background: #FFF;
+            color: #FF0000;
         }
 
         .project-icon {
-            width: 80px;
-            height: 80px;
-            background: #EC4899;
-            border: 4px solid #000;
+            width: 64px;
+            height: 64px;
+            background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            margin-bottom: 8px;
-            box-shadow: 4px 4px 0 #000;
+            font-size: 32px;
+            margin-bottom: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-title {
             color: #000;
-            font-size: 2rem;
-            font-weight: 900;
+            font-size: 1.75rem;
+            font-weight: 400;
             margin-bottom: 16px;
             letter-spacing: -1px;
-            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-description {
-            color: #000;
-            line-height: 1.7;
-            font-size: 1rem;
-            font-weight: 400;
+            color: #666;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            font-weight: 300;
             flex-grow: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
+            gap: 8px;
+            margin-top: 20px;
         }
 
         .tag {
-            background: #6B21A8;
-            color: #FFF;
-            border: 3px solid #000;
-            padding: 8px 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            font-family: 'IBM Plex Mono', monospace;
-            text-transform: uppercase;
+            background: transparent;
+            color: #000;
+            border: 1px solid #E0E0E0;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            font-family: 'Roboto Mono', monospace;
             letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-link {
@@ -156,111 +153,96 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 18px 36px;
-            background: #EC4899;
-            border: 5px solid #000;
+            padding: 16px 32px;
+            background: #000;
             color: #FFF;
             text-decoration: none;
-            font-size: 1rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 6px 6px 0 #000;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 0.5px;
-            margin-top: 16px;
-            text-transform: uppercase;
+            margin-top: 20px;
+            align-self: flex-start;
         }
 
         .project-link:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 9px 9px 0 #000;
-            background: #DB2777;
+            background: #FF0000;
+            color: #FFF;
         }
 
-        .project-link:active {
-            transform: translate(0, 0);
-            box-shadow: 3px 3px 0 #000;
+        .project-card:hover .project-link:hover {
+            background: #000;
+            color: #FFF;
         }
 
         .project-link svg {
-            width: 20px;
-            height: 20px;
-            stroke-width: 3px;
+            width: 16px;
+            height: 16px;
+            stroke-width: 2px;
         }
 
         /* Footer styles */
         .footer {
-            background: #FFF;
-            border: 5px solid #000;
-            box-shadow: 8px 8px 0 #000;
-            padding: 60px 40px;
+            background: #000;
+            padding: 80px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
+            gap: 40px;
         }
 
         .footer-text {
-            color: #000;
-            font-size: 1.1rem;
-            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+            font-weight: 300;
             text-align: center;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .social-links {
             display: flex;
-            gap: 24px;
+            gap: 20px;
         }
 
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: #06B6D4;
-            border: 4px solid #000;
+            width: 56px;
+            height: 56px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: #FFF;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 4px 4px 0 #000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .social-link:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 7px 7px 0 #000;
-            background: #0891B2;
-        }
-
-        .social-link:active {
-            transform: translate(0, 0);
-            box-shadow: 2px 2px 0 #000;
+            background: #FF0000;
+            border-color: #FF0000;
         }
 
         .social-link svg {
-            width: 28px;
-            height: 28px;
-            stroke-width: 2.5px;
+            width: 24px;
+            height: 24px;
+            stroke-width: 1.5px;
         }
 
-        /* Brutalist scrollbar */
+        /* Minimalist scrollbar */
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #FAF5FF;
-            border-left: 3px solid #000;
+            background: #FFF;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #9333EA;
-            border: 3px solid #000;
+            background: #E0E0E0;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #7C3AED;
+            background: #FF0000;
         }
 
         /* Responsive design */
@@ -270,50 +252,40 @@
             }
 
             h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
+                letter-spacing: -2px;
             }
 
             .subtitle {
-                font-size: 1.05rem;
+                font-size: 1rem;
             }
 
             .glass-header {
-                padding: 48px 32px;
-                box-shadow: 8px 8px 0 #000;
-            }
-
-            .glass-header:hover {
-                transform: translate(-2px, -2px);
-                box-shadow: 10px 10px 0 #000;
+                padding: 80px 40px;
+                margin-bottom: 60px;
             }
 
             .project-card {
-                padding: 32px 28px;
-                box-shadow: 6px 6px 0 #000;
-            }
-
-            .project-card:hover {
-                transform: translate(-2px, -2px);
-                box-shadow: 8px 8px 0 #000;
+                padding: 40px 32px;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
-                gap: 32px;
+                margin-bottom: 60px;
             }
 
             .footer {
-                padding: 40px 32px;
+                padding: 60px 32px;
             }
 
             .project-icon {
-                width: 64px;
-                height: 64px;
-                font-size: 36px;
+                width: 56px;
+                height: 56px;
+                font-size: 28px;
             }
 
             .project-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
         }
     </style>
